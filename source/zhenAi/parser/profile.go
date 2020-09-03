@@ -53,3 +53,9 @@ func extractString(contents []byte, re *regexp.Regexp) string {
 		return ""
 	}
 }
+
+func ProfileParser(name string, url string) engine.ParserFunc {
+	return func(c []byte) engine.ParserResult {
+		return ParserProfile(c, url, name)
+	}
+}
