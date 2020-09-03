@@ -1,8 +1,8 @@
 package zhenAi
 
 import (
-	"myGit/Crawler/engine"
-	"myGit/Crawler/source/zhenAi/parser"
+	"Crawler/engine"
+	"Crawler/source/zhenAi/parser"
 )
 
 func IndexRequest() engine.Request {

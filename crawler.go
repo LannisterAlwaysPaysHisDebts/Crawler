@@ -1,11 +1,11 @@
 package main
 
 import (
-	"myGit/Crawler/engine"
-	"myGit/Crawler/source/zhenAi"
+	"Crawler/engine"
+	"Crawler/source/zhenAi"
 )
 
-func main()  {
+func main() {
 	e := engine.SimpleEngine{}
 
 	e.Run(zhenAi.IndexRequest())

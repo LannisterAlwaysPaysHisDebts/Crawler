@@ -1,8 +1,8 @@
 package parser
 
 import (
-	"myGit/Crawler/engine"
-	"myGit/Crawler/model"
+	"Crawler/engine"
+	"Crawler/model"
 	"regexp"
 	"strconv"
 )

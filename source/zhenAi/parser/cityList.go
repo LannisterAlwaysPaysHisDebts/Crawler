@@ -1,7 +1,7 @@
 package parser
 
 import (
-	"myGit/Crawler/engine"
+	"Crawler/engine"
 	"regexp"
 )
 

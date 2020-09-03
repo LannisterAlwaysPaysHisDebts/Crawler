@@ -1,6 +1,6 @@
 package scheduler
 
-import "myGit/Crawler/engine"
+import "Crawler/engine"
 
 type SimpleScheduler struct {
 	workerChan chan engine.Request

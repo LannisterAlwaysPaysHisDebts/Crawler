@@ -1,8 +1,8 @@
 package engine
 
 import (
+	"Crawler/fetcher"
 	"log"
-	"myGit/Crawler/fetcher"
 )
 
 type SimpleEngine struct{}
