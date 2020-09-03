@@ -8,28 +8,28 @@ import (
 	"log"
 )
 
-func ItemSaver() chan engine.Item {
+func ItemSaver() (chan engine.Item, error) {
+	client, err := elastic.NewClient(elastic.SetSniff(false))
+	if err != nil {
+		return nil, err
+	}
+
 	out := make(chan engine.Item)
 	go func() {
 		itemCount := 0
 		for {
 			item := <-out
 			itemCount++
-			err := Save(item)
+			err := Save(client, item)
 			if err != nil {
 				log.Printf("Item Saver: error saving item %v: %v", item, err)
 			}
 		}
 	}()
-	return out
+	return out, nil
 }
 
-func Save(item engine.Item) error {
-	client, err := elastic.NewClient(elastic.SetSniff(false))
-	if err != nil {
-		return err
-	}
-
+func Save(client *elastic.Client, item engine.Item) error {
 	if item.Type == "" {
 		return errors.New("must supply Type")
 	}
@@ -41,7 +41,7 @@ func Save(item engine.Item) error {
 		indexService.Id(item.Id)
 	}
 
-	_, err = indexService.Do(context.Background())
+	_, err := indexService.Do(context.Background())
 	if err != nil {
 		return err
 	}
