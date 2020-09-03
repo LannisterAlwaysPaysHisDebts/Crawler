@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	itemChan, err := persist.ItemSaver()
+	itemChan, err := persist.ItemSaver(zhenAi.Index)
 	if err != nil {
 		panic(err)
 	}
