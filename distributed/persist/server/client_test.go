@@ -11,11 +11,11 @@ import (
 
 func TestItemSaver(t *testing.T) {
 	// start server
-	go serveRpc(config.RPC_PORT, "test1")
+	go serveRpc(config.RpcPort, "test1")
 	time.Sleep(time.Second)
 
 	// start client
-	client, err := rpcsupport.NewClient(config.RPC_PORT)
+	client, err := rpcsupport.NewClient(config.RpcPort)
 	if err != nil {
 		panic(err)
 	}

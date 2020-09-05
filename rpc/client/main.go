@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	conn, err := net.Dial("tcp", config.RPC_PORT)
+	conn, err := net.Dial("tcp", config.RpcPort)
 	if err != nil {
 		panic(err)
 	}

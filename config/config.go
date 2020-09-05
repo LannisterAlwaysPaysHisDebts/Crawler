@@ -1,5 +1,5 @@
 package config
 
 const (
-	RPC_PORT = ":1234"
+	RpcPort = ":1234"
 )

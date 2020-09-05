@@ -11,7 +11,7 @@ import (
 
 func main() {
 	rpc.Register(rpcdemo.DemoService{})
-	listener, err := net.Listen("tcp", config.RPC_PORT)
+	listener, err := net.Listen("tcp", config.RpcPort)
 	if err != nil {
 		panic(err)
 	}

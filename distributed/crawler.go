@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	itemChan, err := client.ItemSaver(config.RPC_PORT)
+	itemChan, err := client.ItemSaver(config.RpcPort)
 	if err != nil {
 		panic(err)
 	}

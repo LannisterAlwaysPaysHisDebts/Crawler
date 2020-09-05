@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	log.Fatal(serveRpc(config.RPC_PORT, "dating_profile"))
+	log.Fatal(serveRpc(config.RpcPort, "dating_profile"))
 }
 
 func serveRpc(host, index string) error {
