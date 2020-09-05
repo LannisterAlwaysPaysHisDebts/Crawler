@@ -86,9 +86,3 @@ func deserializeParser(p SerializedParser) (engine.Parser, error) {
 		return nil, fmt.Errorf("error")
 	}
 }
-
-type CrawlService struct{}
-
-func (CrawlService) Process(req engine.Request, result *engine.ParserResult) error {
-	return nil
-}
