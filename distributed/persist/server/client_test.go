@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Crawler/config"
 	"Crawler/distributed/rpcsupport"
 	"Crawler/engine"
 	"Crawler/model"
@@ -10,12 +11,11 @@ import (
 
 func TestItemSaver(t *testing.T) {
 	// start server
-	const host = ":1234"
-	go serveRpc(host, "test1")
+	go serveRpc(config.RPC_PORT, "test1")
 	time.Sleep(time.Second)
 
 	// start client
-	client, err := rpcsupport.NewClient(host)
+	client, err := rpcsupport.NewClient(config.RPC_PORT)
 	if err != nil {
 		panic(err)
 	}

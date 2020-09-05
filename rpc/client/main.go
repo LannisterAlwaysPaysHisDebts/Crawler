@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Crawler/config"
 	rpcdemo "Crawler/rpc"
 	"fmt"
 	"net"
@@ -8,7 +9,7 @@ import (
 )
 
 func main() {
-	conn, err := net.Dial("tcp", ":1234")
+	conn, err := net.Dial("tcp", config.RPC_PORT)
 	if err != nil {
 		panic(err)
 	}

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Crawler/config"
 	"Crawler/distributed/persist"
 	"Crawler/distributed/rpcsupport"
 	"gopkg.in/olivere/elastic.v5"
@@ -8,7 +9,7 @@ import (
 )
 
 func main() {
-	log.Fatal(serveRpc(":1234", "dating_profile"))
+	log.Fatal(serveRpc(config.RPC_PORT, "dating_profile"))
 }
 
 func serveRpc(host, index string) error {

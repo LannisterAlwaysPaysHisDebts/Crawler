@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Crawler/config"
 	"Crawler/rpc"
 	"log"
 	"net"
@@ -10,7 +11,7 @@ import (
 
 func main() {
 	rpc.Register(rpcdemo.DemoService{})
-	listener, err := net.Listen("tcp", ":1234")
+	listener, err := net.Listen("tcp", config.RPC_PORT)
 	if err != nil {
 		panic(err)
 	}

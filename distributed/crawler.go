@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Crawler/config"
 	"Crawler/distributed/persist/client"
 	"Crawler/engine"
 	"Crawler/scheduler"
@@ -8,7 +9,7 @@ import (
 )
 
 func main() {
-	itemChan, err := client.ItemSaver(":1234")
+	itemChan, err := client.ItemSaver(config.RPC_PORT)
 	if err != nil {
 		panic(err)
 	}
