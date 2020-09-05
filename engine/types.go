@@ -8,9 +8,8 @@ type Parser interface {
 }
 
 type Request struct {
-	Url        string
-	ParserFunc ParserFunc
-	Parser     Parser
+	Url    string
+	Parser Parser
 }
 
 type ParserResult struct {
