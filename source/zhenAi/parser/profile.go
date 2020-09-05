@@ -12,7 +12,7 @@ var CommonCompile = regexp.MustCompile(`<div class="des f-cl" data-v-3c42fade>([
 var idUrlRe = regexp.MustCompile(`https://album.zhenai.com/u/([\d]+)`)
 
 // todo: test, 猜你喜欢
-func ParserProfile(contents []byte, url string, name string) engine.ParserResult {
+func parserProfile(contents []byte, url string, name string) engine.ParserResult {
 	profile := model.Profile{Name: name}
 
 	match := CommonCompile.FindSubmatch(contents)
@@ -54,8 +54,24 @@ func extractString(contents []byte, re *regexp.Regexp) string {
 	}
 }
 
-func ProfileParser(name string) engine.ParserFunc {
-	return func(c []byte, url string) engine.ParserResult {
-		return ParserProfile(c, url, name)
-	}
+type ProfileParser struct {
+	userName string
 }
+
+func (p ProfileParser) Parse(contents []byte, url string) engine.ParserResult {
+	return parserProfile(contents, url, p.userName)
+}
+
+func (p ProfileParser) Serialize() (name string, args interface{}) {
+	return "ProfileParser", p.userName
+}
+
+func NewProfileParser(name string) *ProfileParser {
+	return &ProfileParser{userName: name}
+}
+
+//func ProfileParser(name string) engine.ParserFunc {
+//	return func(c []byte, url string) engine.ParserResult {
+//		return ParserProfile(c, url, name)
+//	}
+//}

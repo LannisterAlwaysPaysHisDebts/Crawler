@@ -13,8 +13,8 @@ func ParserCityList(contents []byte, _ string) engine.ParserResult {
 	result := engine.ParserResult{}
 	for _, m := range matches {
 		result.Requests = append(result.Requests, engine.Request{
-			Url:        string(m[1]),
-			ParserFunc: ParserCity,
+			Url:    string(m[1]),
+			Parser: engine.NewFuncParser(ParserCity, "ParserCity"),
 		})
 		break
 	}

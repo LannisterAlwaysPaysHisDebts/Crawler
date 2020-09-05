@@ -11,5 +11,6 @@ func IndexRequest() engine.Request {
 	return engine.Request{
 		Url:        "http://www.zhenai.com/zhenghun/",
 		ParserFunc: parser.ParserCityList,
+		Parser:     engine.NewFuncParser(parser.ParserCityList, "ParserCityList"),
 	}
 }
