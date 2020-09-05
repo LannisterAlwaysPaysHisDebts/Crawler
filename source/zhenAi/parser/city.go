@@ -31,3 +31,7 @@ func ParserCity(contents []byte, _ string) engine.ParserResult {
 
 	return result
 }
+
+func profileUrl(id string) string {
+	return "https://album.zhenai.com/api/profile/getObjectProfile.do?objectID=" + id + "&data=eyJ2IjoiOWtubWpNYWVLZEJ6a2FiMnpYbzdRZz09Iiwib3MiOiJ3ZWIiLCJpdCI6MjkyLCJ0IjoiUktzdjRwcUw3V3hxRnpYMFhXdGVCREJBMDNNb3laWlhGQTJmVHd6SkRGWTM4dVlEYlhmMFJocTZIZnkyNmJLTit4dnREQVgxbWRlQ1FITGxEUHkwUXc9PSJ9&_=1599206047191&ua=h5%2F1.0.0%2F1%2F0%2F0%2F0%2F0%2F0%2F%2F0%2F0%2Fb032c96f-4048-417a-94d9-9af44ae697dc%2F0%2F0%2F294625501"
+}
