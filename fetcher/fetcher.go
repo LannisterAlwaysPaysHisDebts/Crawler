@@ -3,10 +3,13 @@ package fetcher
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
 func Fetcher(url string) ([]byte, error) {
+	log.Printf("Fetching url %s", url)
+
 	client := http.Client{}
 
 	req, err := http.NewRequest("GET", url, nil)
