@@ -3,6 +3,7 @@ package main
 import (
 	"Crawler/config"
 	"Crawler/distributed/persist/client"
+	worker "Crawler/distributed/worker/client"
 	"Crawler/engine"
 	"Crawler/scheduler"
 	"Crawler/source/zhenAi"
@@ -15,10 +16,16 @@ func main() {
 		panic(err)
 	}
 
+	processor, err := worker.CreateProcessor()
+	if err != nil {
+		panic(err)
+	}
+
 	e := engine.ConcurrentEngine{
-		Scheduler:   &scheduler.QueuedScheduler{},
-		WorkerCount: 10,
-		ItemChan:    itemChan,
+		Scheduler:        &scheduler.QueuedScheduler{},
+		WorkerCount:      10,
+		ItemChan:         itemChan,
+		RequestProcessor: processor,
 	}
 
 	e.Run(zhenAi.IndexRequest())
