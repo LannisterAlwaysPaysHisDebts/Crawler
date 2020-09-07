@@ -6,10 +6,11 @@ import (
 	"Crawler/engine"
 	"Crawler/scheduler"
 	"Crawler/source/zhenAi"
+	"fmt"
 )
 
 func main() {
-	itemChan, err := client.ItemSaver(config.RpcPort)
+	itemChan, err := client.ItemSaver(fmt.Sprintf(":%d", config.RpcPort))
 	if err != nil {
 		panic(err)
 	}
