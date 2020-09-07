@@ -3,6 +3,6 @@ package config
 const (
 	RpcPort = 1234
 
-	// todo:
-	CrawlServiceRpc = ""
+	CrawlServiceRpc = "CrawlService.Process"
+	ItemSaverRpc    = "ItemSaverService.Save"
 )

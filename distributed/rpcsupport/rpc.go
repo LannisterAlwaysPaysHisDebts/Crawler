@@ -8,11 +8,12 @@ import (
 )
 
 func ServeRpc(host string, server interface{}) error {
-	rpc.Register(server)
+	_ = rpc.Register(server)
 	listener, err := net.Listen("tcp", host)
 	if err != nil {
 		return err
 	}
+	log.Printf("Linsting on %s", host)
 
 	for {
 		conn, err := listener.Accept()

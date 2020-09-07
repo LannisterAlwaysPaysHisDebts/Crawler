@@ -5,17 +5,18 @@ import (
 	"Crawler/distributed/rpcsupport"
 	"Crawler/engine"
 	"Crawler/model"
+	"fmt"
 	"testing"
 	"time"
 )
 
 func TestItemSaver(t *testing.T) {
 	// start server
-	go serveRpc(config.RpcPort, "test1")
+	go serveRpc(fmt.Sprintf(":%d", config.RpcPort), "test1")
 	time.Sleep(time.Second)
 
 	// start client
-	client, err := rpcsupport.NewClient(config.RpcPort)
+	client, err := rpcsupport.NewClient(fmt.Sprintf(":%d", config.RpcPort))
 	if err != nil {
 		panic(err)
 	}
@@ -43,7 +44,7 @@ func TestItemSaver(t *testing.T) {
 	}
 
 	var result string
-	err = client.Call("ItemSaverService.Save", item, &result)
+	err = client.Call(config.ItemSaverRpc, item, &result)
 	if err != nil || result != "ok" {
 		t.Errorf("result %s; error : %s", result, err)
 	}
