@@ -8,6 +8,9 @@ import (
 	"log"
 )
 
+/*
+@index es保存的index名称
+*/
 func ItemSaver(index string) (chan engine.Item, error) {
 	client, err := elastic.NewClient(elastic.SetSniff(false))
 	if err != nil {

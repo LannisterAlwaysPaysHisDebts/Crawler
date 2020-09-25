@@ -1,10 +1,11 @@
 package engine
 
+// 并发引擎类型
 type ConcurrentEngine struct {
-	Scheduler        Scheduler
-	WorkerCount      int
-	ItemChan         chan Item
-	RequestProcessor Processor
+	Scheduler        Scheduler // 队列
+	WorkerCount      int       // 启动进程数量
+	ItemChan         chan Item // 数据保存通道
+	RequestProcessor Processor //
 }
 
 type Processor func(request Request) (ParserResult, error)
