@@ -10,26 +10,33 @@ type ConcurrentEngine struct {
 
 type Processor func(request Request) (ParserResult, error)
 
-// 调度队列Scheduler的duck typing
+// 数据调度Scheduler的接口(duck typing)
+// 当前存在simple(单通道)，queued(队列)两个版本
+// 详细代码见/scheduler
 type Scheduler interface {
 	ReadNotifier
-	Submit(Request)
-	WorkChan() chan Request
-	Run()
+	Submit(Request)         // 提交request进通道
+	WorkChan() chan Request // 创建一个工作通道
+	Run()                   // 初始化scheduler
 }
 
 type ReadNotifier interface {
 	WorkerReady(chan Request)
 }
 
+// 开始执行程序
 func (e *ConcurrentEngine) Run(seeds ...Request) {
 	out := make(chan ParserResult)
+
+	// 创建调度队列
 	e.Scheduler.Run()
 
+	// 根据workerCount配置创建对应数量的工作通道
 	for i := 0; i < e.WorkerCount; i++ {
 		e.createWorker(e.Scheduler.WorkChan(), out, e.Scheduler)
 	}
 
+	// 将请求提交到队列
 	for _, r := range seeds {
 		e.Scheduler.Submit(r)
 	}
@@ -58,7 +65,11 @@ func (e *ConcurrentEngine) createWorker(
 	go func() {
 		for {
 			ready.WorkerReady(in)
+
+			// 阻塞等待work chan的数据
 			request := <-in
+
+			// 对请求进行处理
 			result, err := e.RequestProcessor(request)
 			if err != nil {
 				continue
