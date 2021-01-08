@@ -9,6 +9,7 @@ import (
 )
 
 /*
+获取一个Item channel, 同时注册一个goroutine用来保存channel传递过来的数据
 @index es保存的index名称
 */
 func ItemSaver(index string) (chan engine.Item, error) {
@@ -32,6 +33,7 @@ func ItemSaver(index string) (chan engine.Item, error) {
 	return out, nil
 }
 
+// 保存数据
 func Save(index string, client *elastic.Client, item engine.Item) error {
 	if item.Type == "" {
 		return errors.New("must supply Type")

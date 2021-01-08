@@ -2,7 +2,7 @@ package engine
 
 // 并发引擎类型
 type ConcurrentEngine struct {
-	Scheduler        Scheduler // 队列
+	Scheduler        Scheduler // 调度队列
 	WorkerCount      int       // 启动进程数量
 	ItemChan         chan Item // 数据保存通道
 	RequestProcessor Processor //
@@ -10,6 +10,7 @@ type ConcurrentEngine struct {
 
 type Processor func(request Request) (ParserResult, error)
 
+// 调度队列Scheduler的duck typing
 type Scheduler interface {
 	ReadNotifier
 	Submit(Request)
@@ -35,9 +36,13 @@ func (e *ConcurrentEngine) Run(seeds ...Request) {
 
 	for {
 		result := <-out
+
+		// 保存数据
 		for _, item := range result.Items {
 			go func() { e.ItemChan <- item }()
 		}
+
+		// 采集其他资源
 		for _, request := range result.Requests {
 			if !isDuplicate(request.Url) {
 				e.Scheduler.Submit(request)
@@ -46,7 +51,10 @@ func (e *ConcurrentEngine) Run(seeds ...Request) {
 	}
 }
 
-func (e *ConcurrentEngine) createWorker(in chan Request, out chan ParserResult, ready ReadNotifier) {
+func (e *ConcurrentEngine) createWorker(
+	in chan Request,
+	out chan ParserResult,
+	ready ReadNotifier) {
 	go func() {
 		for {
 			ready.WorkerReady(in)
@@ -63,6 +71,7 @@ func (e *ConcurrentEngine) createWorker(in chan Request, out chan ParserResult, 
 
 var visitedUrls = make(map[string]bool)
 
+// url 去重，防止重复采集 todo：待优化
 func isDuplicate(url string) bool {
 	if visitedUrls[url] {
 		return true

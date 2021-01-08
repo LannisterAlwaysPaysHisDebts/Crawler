@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+// 网页数据抓取
 func Fetcher(url string) ([]byte, error) {
 	log.Printf("Fetching url %s", url)
 

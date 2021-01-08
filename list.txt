@@ -1,0 +1,59 @@
+./
+├── README.md
+├── config
+│   └── config.go
+├── crawler.go
+├── distributed
+│   ├── crawler.go
+│   ├── persist
+│   │   ├── client
+│   │   │   └── itemsaver.go
+│   │   ├── rpc.go
+│   │   └── server
+│   │       ├── client_test.go
+│   │       └── itemSaver.go
+│   ├── rpcsupport
+│   │   └── rpc.go
+│   └── worker
+│       ├── client
+│       │   └── worker.go
+│       ├── rpc.go
+│       ├── server
+│       │   ├── server.go
+│       │   └── server_test.go
+│       └── types.go
+├── engine
+│   ├── concurrent.go
+│   ├── simple.go
+│   ├── types.go
+│   └── worker.go
+├── fetcher
+│   ├── fetcher.go
+│   └── fetcher_test.go
+├── list.txt
+├── model
+│   └── profile.go
+├── persist
+│   ├── ItemSaver.go
+│   └── Itemsaver_test.go
+├── rpc
+│   ├── client
+│   │   └── main.go
+│   ├── rpc.go
+│   └── server
+│       └── main.go
+├── scheduler
+│   ├── queued.go
+│   └── simple.go
+├── source
+│   └── zhenAi
+│       ├── index.go
+│       └── parser
+│           ├── city.go
+│           ├── cityList.go
+│           ├── city_test.go
+│           └── profile.go
+└── test
+    └── test.go
+
+21 directories, 35 files
