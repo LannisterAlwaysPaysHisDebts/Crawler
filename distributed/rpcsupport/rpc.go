@@ -7,6 +7,7 @@ import (
 	"net/rpc/jsonrpc"
 )
 
+// 根据host注册rpc.Serve
 func ServeRpc(host string, server interface{}) error {
 	_ = rpc.Register(server)
 	listener, err := net.Listen("tcp", host)
@@ -27,6 +28,7 @@ func ServeRpc(host string, server interface{}) error {
 	return nil
 }
 
+// 根据host创建对应的rpc.Client连接
 func NewClient(host string) (*rpc.Client, error) {
 	conn, err := net.Dial("tcp", host)
 	if err != nil {

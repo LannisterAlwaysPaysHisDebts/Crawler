@@ -19,6 +19,7 @@ var (
 )
 
 func main() {
+	// rpc saver
 	itemChan, err := client.ItemSaver(*itemSaverHost)
 	if err != nil {
 		panic(err)
@@ -38,6 +39,7 @@ func main() {
 	e.Run(zhenAi.IndexRequest())
 }
 
+// 根据hosts创建rpc.Client
 func createClientPool(hosts []string) chan *rpc.Client {
 	var clients []*rpc.Client
 
@@ -54,6 +56,7 @@ func createClientPool(hosts []string) chan *rpc.Client {
 	out := make(chan *rpc.Client)
 	go func() {
 		for {
+			// 无限循环将hosts rpc.client写入通道
 			for _, c := range clients {
 				out <- c
 			}
